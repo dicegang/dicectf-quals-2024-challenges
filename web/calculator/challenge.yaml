@@ -1,0 +1,35 @@
+name: calculator
+author: BrownieInMotion
+description: |-
+  beep boop
+
+  {{ link }}
+
+  [Admin Bot]({{ adminbot }})
+flag:
+  file: ./flag.txt
+sortWeight: 70
+containers:
+  main:
+    build: challenge
+    ports:
+      - 3000
+    replicas: 1
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 400Mi
+      requests:
+        cpu: 50m
+        memory: 300Mi
+provide:
+  - ./calculator.tar.gz
+expose:
+  main:
+    - target: 3000
+      http: calculator
+      healthContent: Calculator
+adminbot: adminbot.js
+value:
+  min: 100
+  max: 250

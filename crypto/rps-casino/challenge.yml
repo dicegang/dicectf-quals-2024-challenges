@@ -1,0 +1,24 @@
+name: rps-casino
+author: clam
+description: |-
+  We're opening a new casino! The only game is rock-paper-scissors though...
+
+  `{{ nc }}`
+provide:
+  - ./server.py
+flag:
+  file: ./flag.txt
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    replicas: 1
+    securityContext:
+      privileged: true
+expose:
+  main:
+    - target: 5000
+      tcp: 31234
+      healthContent: "Let's play rock-paper-scissors"
+sortWeight: 50

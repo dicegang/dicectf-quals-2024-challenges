@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>gpwaf</title>
+        <style>
+            * {
+                font-family: monospace;
+            }
+            #content {
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+                max-width: 830px;
+            }
+            button {
+                font-size: 1.5em;
+            }
+            textarea {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <h1>gpwaf</h1>
+            <p>
+                i made a ejs renderer, its 100% hack proof im using gpt to check
+                all your queries!
+            </p>
+            <form id="gpwaf">
+                <textarea id="template" placeholder="template" rows="30">
+<%= query %></textarea
+                >
+                <br />
+                <button>run!</button>
+            </form>
+            <br />
+            <pre id="result"><%= result %></pre>
+        </div>
+    </body>
+    <script>
+        const auth = new URL(window.location.href).searchParams.get('auth');
+        if (auth) {
+            localStorage.setItem('token', auth);
+            window.location.href = '/';
+        }
+
+        if (!localStorage.getItem('token')) {
+            const login = new URL('<%= endpoint %>/login');
+            login.searchParams.set('redirect', window.location.origin);
+            window.location.href = login.toString();
+        }
+
+        document.getElementById('gpwaf').onsubmit = async (e) => {
+            e.preventDefault();
+
+            document.getElementById('result').textContent = 'running...';
+
+            const result = await (
+                await fetch('<%= endpoint %>/check', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({
+                        template: document.getElementById('template').value,
+                    }),
+                })
+            ).json();
+
+            if (result.error === 'please login!') {
+                localStorage.clear();
+                alert('please login again by refreshing the page!');
+                return;
+            }
+
+            if (result.error) {
+                alert(result.error);
+                return;
+            }
+
+            window.location.search = `token=${encodeURIComponent(result.token)}`;
+        };
+    </script>
+</html>

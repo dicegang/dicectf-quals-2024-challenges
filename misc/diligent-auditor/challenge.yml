@@ -1,0 +1,29 @@
+name: diligent-auditor
+author: aplet123
+description: |-
+  I hired an auditor to secure my python interpreter!
+
+  `{{nc}}`
+
+flag:
+  file: ./flag-e639626913ad08d1.txt
+
+provide:
+  - ./Dockerfile
+  - ./jail.py
+
+containers:
+  main:
+    build: .
+    replicas: 1
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+
+expose:
+  main:
+  - target: 5000
+    tcp: 31130
+    healthContent: mod
+sortWeight: 50

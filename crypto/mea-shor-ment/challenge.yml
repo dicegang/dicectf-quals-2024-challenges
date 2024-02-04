@@ -1,0 +1,13 @@
+name: mea-shor-ment-error
+author: ireland
+description: |-
+  My new quantum computer has no issue running Shor's algorithm, but the readout error is still pretty high.
+flag:
+  file: ./flag.txt
+provide:
+- ./publickey.pem
+- ./ciphertext.bin
+- ./setup.py
+- ./mea_shor_ment_error.py
+- ./shor.txt
+sortWeight: 20

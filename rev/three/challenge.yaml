@@ -1,0 +1,8 @@
+name: three
+author: BrownieInMotion
+description: |-
+  no more, but sometimes less
+flag: dice{s0w3ne3daf1a97hat5th1r7y7wo6yte5}
+provide:
+  - challenge
+sortWeight: 80

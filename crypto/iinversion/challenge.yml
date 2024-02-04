@@ -1,0 +1,39 @@
+name: iinversion
+author: ireland
+description: |-
+  what if we made it good?
+
+  <p>*This is the second part of a two-part challenge.*</p>
+
+  `{{ nc }}`
+value:
+  min: 100
+  max: 250
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    replicas: 1
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        cpu: 4000m
+        memory: 16Gi
+      requests:
+        cpu: 1000m
+        memory: 8Gi
+expose:
+  main:
+    - target: 5000
+      tcp: 30663
+      healthContent: Please provide a base64
+flag:
+  file: ./flag.txt
+provide:
+  - ./server.py
+  - ./generate.py
+  - url: https://static.dicega.ng/uploads/14438b31d64c192a29452a151034a336a5e7d3023d57ba8ba9d9039f17419bc6/public.key
+  - ./x_hard.ctxt
+sortWeight: 5

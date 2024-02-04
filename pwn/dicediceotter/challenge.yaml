@@ -1,0 +1,13 @@
+name: dicediceotter
+author: NotDeGhost
+description: |-
+  Escape the game.
+
+  [ddg.mc.ax](https://ddg.mc.ax)
+
+  Submit your URL: [adminbot-ddg.mc.ax](https://adminbot-ddg.mc.ax)
+provide:
+  - url: https://static.dicega.ng/uploads/0a76c3bcd29d221f0c972e9f50f7eb87b4ac12fa377d77843262e9ce2ba00d76/dicedicegoose.tar.gz
+  - ./solana_prog.so
+flag: dice{danc1ng_0n_f1r3_c71d311}
+sortWeight: 5

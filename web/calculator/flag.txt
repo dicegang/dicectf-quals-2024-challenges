@@ -1,0 +1,1 @@
+dice{society_if_typescript_were_sound}

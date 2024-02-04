@@ -1,0 +1,10 @@
+name: scrambled up
+author: infuzion
+description: |-
+  This flag checker sure looks like it went through a blender.
+
+  Note: Run the challenge inside a `ubuntu:22.04` docker container if you run into libc issues or crashes inside libc during startup.
+flag: dice{l0wc0de_i5_tR3nDinG_7a2nchdaj12n}
+provide:
+- ./handout/scrambled-up
+sortWeight: 50

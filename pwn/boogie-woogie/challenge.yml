@@ -1,0 +1,42 @@
+name: boogie-woogie
+author: pepsipu
+description: |-
+  i've been watching too much jjk
+
+  <img src="https://cdn.discordapp.com/attachments/687192357031903245/1202828753185669151/GFSHltjWkAAUveD.png" width="250">
+
+  due to super bruteforce, we are forced to add POW. this is why we can't have nice things
+
+  `{{ nc }}`
+
+flag:
+  file: ./src/flag.txt
+provide:
+  - src/boogie-woogie
+  - src/Dockerfile
+  - src/hook.sh
+  - src/run.sh
+  - src/chroot.sh
+
+containers:
+  main:
+    build: src
+    ports:
+      - 5000
+    replicas: 1
+    resources:
+      limits:
+        memory: 200Mi
+        cpu: 3000m
+      requests:
+        memory: 100Mi
+        cpu: 500m
+    securityContext:
+      privileged: true
+
+expose:
+  main:
+    - target: 5000
+      tcp: 31040
+      healthContent: proof of work
+sortWeight: 50

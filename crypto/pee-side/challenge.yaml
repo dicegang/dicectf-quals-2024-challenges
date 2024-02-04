@@ -1,0 +1,31 @@
+name: pee-side
+author: gripingberry
+description: |-
+  I decided that CSIDH needed a bit more entropy! Now, not only do we have a random starting curve, but also a random point!
+
+  `{{ nc }}`
+provide:
+  - ./server.py
+flag:
+  file: ./flag.txt
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    replicas: 1
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 3Gi
+      requests:
+        cpu: 500m
+        memory: 512Mi
+expose:
+  main:
+    - target: 5000
+      tcp: 30893
+      healthContent: thinking...
+sortWeight: 30

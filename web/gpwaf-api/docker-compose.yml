@@ -1,0 +1,17 @@
+services:
+  api:
+    build: ./api
+    init: true
+    restart: always
+    hostname: api
+    environment:
+      OPENAI_API_KEY: sk-
+      PRODUCTION: 1
+  caddy:
+    image: caddy
+    init: true
+    restart: always
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    ports:
+      - 443:443

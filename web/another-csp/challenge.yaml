@@ -1,0 +1,30 @@
+name: another-csp
+author: larry
+description: |-
+  i've made too many csp challenges, but every year another funny one comes up.
+
+  [Instancer]({{ instancer }})
+flag: 'dice{yeah-idk-this-one-was-pretty-funny}'
+sortWeight: 30
+provide:
+  - another-csp.tar.gz
+containers:
+  app:
+    build: challenge
+    ports:
+      - 8080
+    environment:
+      FLAG: 'dice{yeah-idk-this-one-was-pretty-funny}'
+    resources:
+      limits:
+        memory: 500M
+        cpu: 500m
+      requests:
+        memory: 200M
+        cpu: 500m
+expose:
+  app:
+    - target: 8080
+      http: another-csp
+instancer:
+  timeout: 600000

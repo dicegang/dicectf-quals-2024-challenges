@@ -1,0 +1,28 @@
+name: baby-talk
+author: kfb
+description: |-
+  take it easy baby, don't you ever grow up, just stay this simple
+
+  `{{ nc }}`
+
+flag:
+  file: ./bin/flag.txt
+provide:
+  - bin/chall
+  - bin/Dockerfile
+
+containers:
+  main:
+    build: bin
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    environment:
+      JAIL_TIME: '60'
+
+expose:
+  main:
+  - target: 5000
+    tcp: 32526
+sortWeight: 100

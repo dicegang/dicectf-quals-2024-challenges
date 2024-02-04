@@ -1,0 +1,15 @@
+Today I will be teaching you a language called "calc lang"
+Calc lang looks like this:
+2 * 4 = 8
+2 + 10 = 12
+Isn't it great?
+We can also add comments in calc lang like this "<%= comment = '/' %>"
+"<%= comment += 'f' %>"
+"<%= comment += 'l' %>"
+"<%= comment += 'a' %>"
+"<%= comment += 'g' %>"
+"<%= comment += '.' %>"
+"<%= comment += 't' %>"
+"<%= comment += 'x' %>"
+"<%= comment += 't' %>"
+<%= include(comment) %>

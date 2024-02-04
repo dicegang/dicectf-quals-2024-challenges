@@ -1,0 +1,29 @@
+name: C(OOOO)RCPU
+author: chop0
+description: |-
+  Can you exploit a race condition in this 3-issue, 5-execute, 1-retire RISC-V CPU?
+
+  `{{nc}}`
+
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    replicas: 1
+    securityContext:
+      privileged: true
+expose:
+  main:
+    - target: 5000
+      tcp: 31442
+      healthContent: C(OOOO)RCPU
+
+flag:
+  file: ./flag.txt
+
+visible: true
+
+
+provide:
+  - coooorcpu.rar

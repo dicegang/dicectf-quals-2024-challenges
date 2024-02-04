@@ -1,0 +1,19 @@
+name: dicedicegoose
+author: NotDeGhost
+description: |-
+  Follow the leader.
+
+  {{ link }}
+containers:
+  main:
+    build: client
+    ports:
+      - 1337
+    replicas: 1
+expose:
+  main:
+    - target: 1337
+      http: ddg
+      healthContent: DDG
+flag: dice{pr0_duck_gam3r_AAEJCQEBCQgCAQkHAwEJBgQBCQUFAQkEBgEJAwcBCQIIAQkB}
+sortWeight: 100

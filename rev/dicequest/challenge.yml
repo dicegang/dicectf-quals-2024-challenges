@@ -1,0 +1,13 @@
+name: dicequest
+author: clubby
+description: |-
+  Try 2024's hottest game so far - DiceQuest! Can you survive the onslaught?
+  Custom sprites made by [Gold](https://www.fiverr.com/goldpixela)
+
+  note: the flag matches the regex `dice{[a-z_]+}`
+
+flag:
+  dice{your_flag_is_not_in_another_castle}
+provide:
+  - handout/game.zip
+sortWeight: 100

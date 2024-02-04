@@ -1,0 +1,27 @@
+name: gpwaf
+author: larry
+description: |-
+  i made a ejs renderer, its 100% hack proof im using gpt to check all your queries!
+
+  please note that the backend for this challenge is _not_ the same as the one given to avoid leaking our API key, but the queries to the OpenAI API are exactly the same.
+
+  [Instancer]({{ instancer }})
+flag:
+  file: challenge/flag.txt
+sortWeight: 90
+provide:
+  - gpwaf.tar.gz
+containers:
+  app:
+    build: challenge
+    ports:
+      - 8080
+    environment:
+      API_ENDPOINT: https://gpwaf-api.mc.ax
+      JWK_ENDPOINT: https://gpwaf-api.attest.lol/jwk
+expose:
+  app:
+    - target: 8080
+      http: gpwaf
+instancer:
+  timeout: 600000

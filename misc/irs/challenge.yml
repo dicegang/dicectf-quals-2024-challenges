@@ -1,0 +1,29 @@
+name: IRS
+author: kmh
+description: |-
+  The Internal Restrictedpythonexecution Service has established a new automated auditing pipeline. Can you remain undetected?
+
+  `{{ nc }}`
+flag:
+  file: ./flag.txt
+sortWeight: 5
+provide:
+- ./irs.c
+- ./irs
+- ./audit.py
+- ./build.sh
+- ./run.sh
+- ./Dockerfile
+containers:
+  main:
+    build: .
+    replicas: 1
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+expose:
+  main:
+  - target: 5000
+    tcp: 31337
+    healthContent: Welcome to the IRS

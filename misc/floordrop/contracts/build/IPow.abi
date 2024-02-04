@@ -1,0 +1,1 @@
+[{"inputs":[{"internalType":"bytes","name":"solution","type":"bytes"},{"internalType":"uint256","name":"solver_nonce","type":"uint256"}],"name":"solveChallenge","outputs":[],"stateMutability":"nonpayable","type":"function"}]

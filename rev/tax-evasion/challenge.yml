@@ -1,0 +1,10 @@
+name: L'Évasion Fiscale
+author: hgarrereyn
+description: |-
+  Just some creative accounting...
+flag: dice{j3_su1s_av0c4t_f1scalist3_}
+provide:
+- ./handout/DiceTax.catala_en
+- ./handout/Dockerfile
+- ./handout/tax.py
+sortWeight: 10

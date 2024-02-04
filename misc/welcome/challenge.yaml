@@ -1,0 +1,7 @@
+name: welcome
+author: defund
+description: |
+  Join us at [discord.gg/dicectf](https://discord.com/invite/dicectf) and read the `#rules` channel to get the flag!
+flag: dice{flag!}
+tiebreakEligible: false
+value: 1

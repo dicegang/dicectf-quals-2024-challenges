@@ -1,0 +1,31 @@
+name: what-a-jpeg-is
+author: ireland
+description: |-
+  I just want a picture of a god-dang Madagascar cat
+
+  `{{ nc }}`
+flag:
+  file: ./challenge/flag.txt
+provide:
+  - ./challenge/challenge.py
+containers:
+  main:
+    build: challenge
+    ports:
+      - 5000
+    replicas: 1
+    resources:
+      limits:
+        cpu: 2500m
+        memory: 4000Mi
+      requests:
+        cpu: 500m
+        memory: 300Mi
+    securityContext:
+      privileged: true
+expose:
+  main:
+  - target: 5000
+    tcp: 31373
+    healthContent: Starting
+sortWeight: 60

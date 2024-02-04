@@ -1,0 +1,26 @@
+name: C(OOO)RCPU
+author: chop0
+description: |-
+  Can you find a logic flaw in this 3-issue, 5-execute, 1-retire RISC-V CPU?
+
+  `{{nc}}`
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    replicas: 1
+    securityContext:
+      privileged: true
+expose:
+  main:
+    - target: 5000
+      tcp: 31441
+      healthContent: C(OOO)RCPU
+flag:
+  file: ./flag.txt
+
+provide:
+  - cooorcpu.rar
+
+sortWeight: 10

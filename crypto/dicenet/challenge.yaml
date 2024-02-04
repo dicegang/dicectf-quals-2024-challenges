@@ -1,0 +1,35 @@
+name: dicenet
+author: defund
+description: |-
+  AI meets cryptography! DiceNet is a cutting-edge flag checker which leverages multi-party computation to perform secure inference.
+
+  <p>*There is a bug in the construction described in the papers (see README.txt), which is implemented by swanky. You do not need to comb through the library's code to find the bug. Read the papers!*</p>
+
+  <p>*Hint: what happens when you use a composite modulus?*</p>
+
+  `./client --model model.json --weights dummy_weights.json --file sheep.png mc.ax:31002`
+provide:
+  - file: ./handout.tar.gz
+    as: dicenet.tar.gz
+flag: dice{y0u_b3tter_n0t_bl4ckbox_th1s}
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    replicas: 1
+    resources:
+      limits:
+        memory: 500Mi
+        cpu: 3000m
+      requests:
+        memory: 200Mi
+        cpu: 500m
+    securityContext:
+      privileged: true
+expose:
+  main:
+    - target: 5000
+      tcp: 31002
+      healthContent: DICENET
+sortWeight: 10

@@ -1,0 +1,102 @@
+name: floordrop
+author: hpmv, orion
+description: |
+  Ever heard of airdrops? Well, we're doing a *floor*drop. We're dropping the flag on the floor. Go pick it up.
+
+  This challenge happens on DiceChain, an Ethereum-compatible network started using go-ethereum with the genesis.json provided to you.
+  You may start a challenge attempt at any time by connecting to the provided nc.
+
+  During each challenge attempt,
+
+  * The server will generate a challenge for you to solve and send a transaction that calls `setChallenge(the challenge)` on the ProofOfWork contract.
+  * Two seconds later, the server will send another transaction that calls `expireChallenge()` on the same contract.
+  * Your goal is to solve the challenge and submit the solution by calling `solveChallenge(the solution encoded in bigendian bytes, random nonce)`, before the challenge expires. A script to solve the challenge has been provided to you in `solve.py`.
+  * If you submit the correct solution before the challenge expires, a flag will be printed in the same nc session.
+
+  You're encouraged to use the mock challenge (menu option 1) to familiarize yourself with the challenge setup.
+  Also, to help with your understanding, an example series of transactions that would yield a successful solve can be found in block [154](https://floordrop.hpmv.dev/block/154).
+
+  Links:
+
+  * Block explorer: [https://floordrop.hpmv.dev/](https://floordrop.hpmv.dev/)
+  * RPC: https://floordrop-rpc.hpmv.dev/
+  * Faucet: {{ link }} (use to get some free DICE!).
+  * `{{ nc }}`
+provide:
+  - handouts/floordrop.zip
+flag: dice{fr0ntrunn1ng_1s_n0t_ju5t_f0r_s4ndw1ch1ng_f8d9f834}
+containers:
+  mongo:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 579wFjds0AQ8374z4TRyjQr
+    ports:
+      - 27017
+    resources:
+      limits:
+        cpu: 200m
+        memory: 200Mi
+      requests:
+        cpu: 200m
+        memory: 200Mi
+  daemon:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-daemon
+    environment:
+      MONGODB_URI: mongodb://root:579wFjds0AQ8374z4TRyjQr@mongo:27017
+      DESIRED_ACCOUNTS: "1000"
+      FAUCET_KEY: '0x14ec0a7bb2781d36b3dc73a101fd9fd1f5a6d0f3a58bc7dda74e54032d23a35a'
+    ports:
+      - 32124  # not used
+    resources:
+      limits:
+        cpu: 100m
+        memory: 200Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+  chal:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-chal
+    securityContext:
+      privileged: true
+    environment:
+      JAIL_ENV_MONGODB_URI: mongodb://root:579wFjds0AQ8374z4TRyjQr@mongo:27017
+    ports:
+      - 5000
+    resources:
+      limits:
+        cpu: 16000m
+        memory: 4Gi
+      requests:
+        cpu: 200m
+        memory: 500Mi
+  ui:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-ui
+    environment:
+      MONGODB_URI: mongodb://root:579wFjds0AQ8374z4TRyjQr@mongo:27017
+    ports:
+      - 8501
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 500Mi
+      requests:
+        cpu: 200m
+        memory: 200Mi
+expose:
+  chal:
+  - target: 5000
+    tcp: 32123
+    healthContent: "Welcome to Floordrop"
+  ui:
+  - target: 8501
+    http: floordrop-faucet
+sortWeight: 10

@@ -1,0 +1,23 @@
+name: yaonet
+author: defund
+description: |-
+  Key...no, that's just the letters and numbers that were on that little sheet of paper
+
+  `ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null yaonet@mc.ax -p 31000 -i id_ecdsa`
+provide:
+  - ./id_ecdsa.pub
+  - ./id_ecdsa
+flag:
+  file: ./flag.txt
+containers:
+  main:
+    build: .
+    ports:
+      - 22
+    replicas: 1
+expose:
+  main:
+    - target: 22
+      tcp: 31000
+      healthContent: SSH
+sortWeight: 100

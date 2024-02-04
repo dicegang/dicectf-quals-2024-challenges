@@ -1,0 +1,17 @@
+FROM python:3.12-slim AS build
+RUN apt-get update && apt-get install -y build-essential
+WORKDIR /app
+ADD deployer/requirements.txt /app/
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+FROM pwn.red/jail
+COPY --from=build / /srv
+ADD deployer/pow.py /srv/app/
+COPY deployer/pow_challenge.py /srv/app/run
+ADD contracts/build/ProofOfWork.abi /srv/app/contracts/ProofOfWork.abi
+ADD contracts/build/ProofOfWork.bin /srv/app/contracts/ProofOfWork.bin
+
+ADD docker/hook.sh /jail/hook.sh
+
+ENV JAIL_MEM=150M JAIL_TIME=120 JAIL_CONNS=20 JAIL_PIDS=10 JAIL_CPU=10000
+ENV JAIL_ENV_CONTRACTS_DIR=/app/contracts

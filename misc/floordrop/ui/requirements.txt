@@ -1,0 +1,3 @@
+streamlit
+pymongo
+web3

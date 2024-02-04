@@ -1,0 +1,42 @@
+# Not for deployment, but for local testing.
+version: "3.8"
+services:
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 579wFjds0AQ8374z4TRyjQr
+    ports:
+      - 27017:27017
+  daemon:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-daemon
+    environment:
+      MONGODB_URI: mongodb://root:579wFjds0AQ8374z4TRyjQr@mongo:27017
+      DESIRED_ACCOUNTS: 10
+      # This is different from challenge.yaml to prevent collisions
+      FAUCET_KEY: '0x180199299f5bf8e269fec4dac376270bfe17a2c891f64cba77253ac9b6a3d44a'
+    depends_on:
+      - mongo
+  chal:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-chal
+    privileged: true
+    environment:
+      JAIL_ENV_MONGODB_URI: mongodb://root:579wFjds0AQ8374z4TRyjQr@mongo:27017
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongo
+  ui:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-ui
+    environment:
+      MONGODB_URI: mongodb://root:579wFjds0AQ8374z4TRyjQr@mongo:27017
+    ports:
+      - 8501:8501
+    depends_on:
+      - mongo

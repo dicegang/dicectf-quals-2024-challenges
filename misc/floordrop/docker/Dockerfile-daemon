@@ -1,0 +1,13 @@
+FROM python:3.12-slim
+RUN apt-get update && apt-get install -y build-essential
+WORKDIR /app
+ADD deployer/requirements.txt /app/
+RUN pip3 install -r requirements.txt
+
+ADD deployer/distributor.py /app/
+ADD contracts/build/Distributor.abi /app/contracts/Distributor.abi
+ADD contracts/build/Distributor.bin /app/contracts/Distributor.bin
+
+ENV CONTRACTS_DIR=/app/contracts
+
+CMD ["python3", "distributor.py"]

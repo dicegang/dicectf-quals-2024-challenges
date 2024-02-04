@@ -1,0 +1,24 @@
+name: unipickle
+author: kmh
+description: |-
+  pickle
+
+  `{{ nc }}`
+flag:
+  file: ./flag.txt
+provide:
+- ./unipickle.py
+containers:
+  main:
+    build: .
+    replicas: 1
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+expose:
+  main:
+  - target: 5000
+    tcp: 31773
+    healthContent: pickle
+sortWeight: 30

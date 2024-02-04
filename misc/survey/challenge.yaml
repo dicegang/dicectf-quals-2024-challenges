@@ -1,0 +1,8 @@
+name: survey
+author: defund
+description: |
+  Thanks for participating in DiceCTF Quals! Fill out this survey to get the flag [here](https://forms.gle/x8zoEkARneGFcJwJA). We hope to see you in NYC for Finals!
+flag: dice{thanks_for_playing_dicectf!!!!!}
+tiebreakEligible: false
+value: 1
+visible: true

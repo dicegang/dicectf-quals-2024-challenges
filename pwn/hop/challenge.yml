@@ -1,0 +1,26 @@
+name: hop
+author: clubby
+description: |-
+  Using 32 bits to encode a short jump is so wasteful... this will surely be better🐞🤓
+
+  `{{nc}}`
+
+flag:
+  file: ./src/flag.txt
+provide:
+  - handout/hop.zip
+containers:
+  main:
+    build: src/
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    replicas: 1
+
+expose:
+  main:
+  - target: 5000
+    tcp: 32421
+    healthContent: Send your exploit
+sortWeight: 70

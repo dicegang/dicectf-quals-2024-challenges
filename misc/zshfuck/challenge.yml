@@ -1,0 +1,24 @@
+name: zshfuck
+author: arxenix
+description: |-
+  may your code be under par.
+  execute the `getflag` binary somewhere in the filesystem to win
+
+  `{{ nc }}`
+flag: dice{d0nt_u_jU5T_l00oo0ve_c0d3_g0lf?}
+provide:
+- ./jail.zsh
+containers:
+  main:
+    build: .
+    replicas: 1
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+expose:
+  main:
+  - target: 5000
+    tcp: 31774
+    healthContent: Specify
+sortWeight: 40

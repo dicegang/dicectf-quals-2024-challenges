@@ -1,0 +1,9 @@
+name: neurotic
+author: hgarrereyn
+description: |-
+  mushy
+flag: dice{int3racti0n_c0mbin4t0rs_:)}
+provide:
+- ./handout/brain.json
+- ./handout/neurotic.py
+sortWeight: 5

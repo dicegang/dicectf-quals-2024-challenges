@@ -1,0 +1,11 @@
+name: pain-plus-plus
+author: solomon-ucko
+description: |-
+  Pain++
+
+  I'd recommend reading the x86-64 System V ABI documentation and the libstdc++ source code while attempting this.
+flag:
+  dice{would_you_like_to_try_the_windows_abi_next_time_685dfc4bc1a0}
+provide:
+  - handout/pain-plus-plus
+sortWeight: 90

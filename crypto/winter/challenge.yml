@@ -1,0 +1,24 @@
+name: winter
+author: defund
+description: |-
+  A simple implementation of the Winternitz signature scheme.
+
+  `{{ nc }}`
+provide:
+  - ./server.py
+flag:
+  file: ./flag.txt
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    replicas: 1
+    securityContext:
+      privileged: true
+expose:
+  main:
+    - target: 5000
+      tcp: 31001
+      healthContent: give me a message
+sortWeight: 90

@@ -1,0 +1,43 @@
+cargo-features = ["trim-paths"]
+
+[package]
+name = "dicequest"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bevy_rand = { version = "0.4", features = ["rand_chacha"] }
+bevy_prng = "0.2.0"
+rand_core = "0.6.4"
+bevy-inspector-egui = { version = "0.22.1", optional = true }
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+strip = "symbols"
+trim-paths = true
+
+[dependencies.bevy]
+version = "0.12.1"
+default-features = false
+features = [
+    "bevy_asset",
+    "bevy_winit",
+    "bevy_core_pipeline",
+    "bevy_render",
+    "bevy_sprite",
+    "bevy_text",
+    "bevy_ui",
+    "multi-threaded",
+    "png",
+    "default_font",
+    "x11"
+]
+
+[features]
+default = []
+inspect = ["bevy-inspector-egui"]
